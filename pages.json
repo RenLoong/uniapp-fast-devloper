@@ -24,19 +24,24 @@
 	},
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "#3cc51f",
+		"selectedColor": "#006EFF",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
 			"pagePath": "pages/index/index",
-			"iconPath": "static/logo.png",
-			"selectedIconPath": "static/logo.png",
-			"text": "组件"
+			"iconPath": "static/tabs/icon-1.png",
+			"selectedIconPath": "static/tabs/icon-1.png",
+			"text": "首页"
 		}, {
 			"pagePath": "pages/user/user",
-			"iconPath": "static/logo.png",
-			"selectedIconPath": "static/logo.png",
-			"text": "接口"
+			"iconPath": "static/tabs/icon-2.png",
+			"selectedIconPath": "static/tabs/icon-2.png",
+			"text": "帮助中心"
+		}, {
+			"pagePath": "pages/user/user",
+			"iconPath": "static/tabs/icon-2.png",
+			"selectedIconPath": "static/tabs/icon-2.png",
+			"text": "订单查询"
 		}]
 	},
 	"uniIdRouter": {}
