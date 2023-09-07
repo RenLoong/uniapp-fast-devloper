@@ -6,23 +6,12 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		name:"x-more",
-		props:{
-			text:{
-				type:String,
-				default(){
-					return '';
-				}
-			}
-		},
-		data() {
-			return {
-				
-			};
-		}
-	}
+<script lang="ts" setup>
+	const props = withDefaults(defineProps<{
+		text ?: string
+	}>(), {
+		text: ''
+	});
 </script>
 
 <style lang="scss">

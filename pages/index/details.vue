@@ -56,9 +56,9 @@
 					<view class="flex flex-center h9 flex-wrap">
 						<uni-icons type="circle-filled" color="#4772CF"></uni-icons>
 						<text class="ml-2">我已阅读并同意</text>
-						<text class="text-primary">《信息收集公告》</text>
+						<text class="text-primary" @tap="$page.open('/pages/article/content')">《信息收集公告》</text>
 						<text>及</text>
-						<text class="text-primary">《入网协议》</text>
+						<text class="text-primary" @tap="$page.open('/pages/article/content')">《入网协议》</text>
 					</view>
 				</view>
 			</view>

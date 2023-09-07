@@ -25,75 +25,60 @@
 				</view>
 			</scroll-view>
 			<view class="flex-1 flex flex-center" v-else>
-				<view class="text-grey h9"><text class="text-primary" @tap="$base.openPage({url:'/member/pages/address/save'})">创建</text>一个收货地址吧~</view>
+				<view class="text-grey h9"><text class="text-primary" @tap="$page.open({url:'/member/pages/address/save'})">创建</text>一个收货地址吧~</view>
 			</view>
 		</view>
 	</x-popup>
 </template>
 
-<script>
-	export default {
-		name:"x-address",
-		props:{
-			checked:{
-				type:Number,
-				default(){
-					return null;
-				}
-			}
-		},
-		data() {
-			return {
-				showPopup:false,
-				userAddress:{id:null},
-				list:[]
-			};
-		},
-		created() {
-			this.getAddress();
-			uni.$on('Update::UserAddress',this.getAddress);
-		},
-		unmounted() {
-			uni.$off('Update::UserAddress',this.getAddress);
-		},
-		emits:['selected'],
-		methods:{
-			getAddress(){
-				this.$base.get({
-					url:'user/address/list'
-				},ret=>{
-					if(ret){
-						if(ret.code===this.$base.config.ResponseCode.SUCCESS){
-							this.list=ret.data;
-							for (let i = 0; i < this.list.length; i++) {
-								const item=this.list[i];
-								if(this.checked){
-									if(item.id===this.checked){
-										this.selected(item);
-										break;
-									}
-									continue;
-								}
-								if(item.is_default){
-									this.selected(item);
+<script lang="ts" setup>
+import { $http, $page } from '@/common/common';
+import { onMounted, ref } from "vue";
+	const props = withDefaults(defineProps<{
+		checked? : number
+	}>(), {
+	});
+	const showPopup=ref(false);
+	const userAddress=ref({
+		id:null
+	});
+	const list=ref<any[]>([]);
+	const getAddress=()=>{
+			$http.get('user/address/list').then(ret=>{
+				if(ret){
+					if(ret.code===$http.ResponseCode.SUCCESS){
+						list.value=ret.data;
+						for (let i = 0; i < list.value.length; i++) {
+							const item=list.value[i];
+							if(props.checked){
+								if(item.id===props.checked){
+									selected(item);
 									break;
 								}
+								continue;
+							}
+							if(item.is_default){
+								selected(item);
+								break;
 							}
 						}
 					}
-				})
-			},
-			show(){
-				this.showPopup=true;
-			},
-			selected(item){
-				this.userAddress=item;
-				this.$emit('selected',item);
-				this.showPopup=false;
-			}
-		},
-		expose:['show'],
+				}
+			})
 	}
+	const emit=defineEmits(['selected']);
+	const show=()=>{
+		showPopup.value=true;
+	}
+	const selected=(item:any)=>{
+		userAddress.value=item;
+		emit('selected',item);
+		showPopup.value=false;
+	}
+	onMounted(()=>{
+		getAddress();
+	})
+	defineExpose({show});
 </script>
 
 <style>

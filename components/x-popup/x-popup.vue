@@ -1,70 +1,46 @@
 <template>
 	<view class="x-popup-mask" :class="{'x-popup--show':state}" @tap="hide" @mousemove.stop>
-		<view class="x-popup-content" :style="state?'top:'+top:'top:100vh'"
-		@tap.stop>
+		<view class="x-popup-content" :style="state?'top:'+props.top:'top:100vh'" @tap.stop>
 			<slot />
 		</view>
 	</view>
 </template>
 
-<script>
-	import {
-		ref
-	} from 'vue';
-	export default {
-		name: "x-popup",
-		props: {
-			modelValue:{
-				type:[String,Number,Boolean]
-			},
-			top:{
-				type:String,
-				default(){
-					return '50vh';
-				}
-			},
-			autoHideTabBar:{
-				type:Boolean,
-				default(){
-					return false;
-				}
-			},
-		},
-		emits: ['update:modelValue'],
-		watch: {
-			modelValue(val, oldVal) {
-				this.state = val;
-				if (val) {
-					this.show();
-				}else{
-					if(this.autoHideTabBar)
-					uni.showTabBar();
-				}
-			}
-		},
-		data() {
-			return {
-				state: false
-			};
-		},
-		created() {
-			this.state = this.modelValue;
-		},
-		methods: {
-			show() {
-				if(this.autoHideTabBar)
-				uni.hideTabBar();
-			},
-			hide() {
-				this.$emit('update:modelValue', false);
-				if(this.autoHideTabBar)
-				uni.showTabBar();
-			}
-		}
+<script lang="ts" setup>
+	import { ref, watchEffect } from 'vue';
+	const props = withDefaults(defineProps<{
+		modelValue : boolean,
+		top ?: string,
+		autoHideTabBar ?: boolean,
+		limit ?: number
+	}>(), {
+		top: '50vh',
+		autoLoad: false
+	});
+	const state = ref(false);
+	const emit = defineEmits(['update:modelValue']);
+
+	const show = () => {
+		if (props.autoHideTabBar)
+			uni.hideTabBar();
 	}
+	const hide = () => {
+		emit('update:modelValue', false);
+		if (props.autoHideTabBar)
+			uni.showTabBar();
+	}
+	watchEffect(() => {
+		state.value = props.modelValue;
+		if (props.modelValue) {
+			show();
+		} else {
+			if (props.autoHideTabBar)
+				uni.showTabBar();
+		}
+	})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.x-popup {
 		&-mask {
 			overflow: hidden;
@@ -82,7 +58,7 @@
 			position: fixed;
 			left: 0;
 			right: 0;
-			top:100vh;
+			top: 100vh;
 			bottom: 0;
 			z-index: 1001;
 			background-color: #FFFFFF;
@@ -94,9 +70,10 @@
 			display: flex;
 			flex-direction: column;
 		}
-		&--show{
-			top:0;
-			background-color: rgba(0, 0, 0, .45);
+
+		&--show {
+			top: 0;
+			background-color: var(--xl-mask);
 		}
 	}
 </style>

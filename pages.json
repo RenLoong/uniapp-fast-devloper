@@ -56,6 +56,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/article/content",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "Loading...",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

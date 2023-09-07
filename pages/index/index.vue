@@ -21,7 +21,7 @@
 			</view>
 			<swiper class="notify-swiper flex-1" autoplay :interval="3000" :duration="1000" vertical circular>
 				<swiper-item class="" v-for="item in 10">
-					<view class="text-warning h10 font-weight-600 notify-swiper-title">公告</view>
+					<view class="text-warning h10 font-weight-600 notify-swiper-title" @tap="$page.open('/pages/article/content')">公告</view>
 				</swiper-item>
 			</swiper>
 		</view>
