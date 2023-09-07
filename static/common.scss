@@ -50,48 +50,11 @@ $color-list: (
     "dark-dark-2":darken($uni-text-color,20%),
     "dark-dark-3":darken($uni-text-color,30%),
     "hover":$uni-bg-color-hover,
-    "mask":$uni-bg-color-mask
-);
-// 文字颜色
-$text-color-list: (
-    "white":#FFFFFF,
-    "primary":$uni-color-primary,
-    "primary-light-1":lighten($uni-color-primary,10%),
-    "primary-light-2":lighten($uni-color-primary,20%),
-    "primary-light-3":lighten($uni-color-primary,30%),
-    "primary-dark-1":darken($uni-color-primary,10%),
-    "primary-dark-2":darken($uni-color-primary,20%),
-    "primary-dark-3":darken($uni-color-primary,30%),
-    "success":$uni-color-success,
-    "success-light-1":lighten($uni-color-success,10%),
-    "success-light-2":lighten($uni-color-success,20%),
-    "success-light-3":lighten($uni-color-success,30%),
-    "success-dark-1":darken($uni-color-success,10%),
-    "success-dark-2":darken($uni-color-success,20%),
-    "success-dark-3":darken($uni-color-success,30%),
-    "warning":$uni-color-warning,
-    "warning-light-1":lighten($uni-color-warning,10%),
-    "warning-light-2":lighten($uni-color-warning,20%),
-    "warning-light-3":lighten($uni-color-warning,30%),
-    "warning-dark-1":darken($uni-color-warning,10%),
-    "warning-dark-2":darken($uni-color-warning,20%),
-    "warning-dark-3":darken($uni-color-warning,30%),
-    "danger":$uni-color-error,
-    "danger-light-1":lighten($uni-color-error,10%),
-    "danger-light-2":lighten($uni-color-error,20%),
-    "danger-light-3":lighten($uni-color-error,30%),
-    "danger-dark-1":darken($uni-color-error,10%),
-    "danger-dark-2":darken($uni-color-error,20%),
-    "danger-dark-3":darken($uni-color-error,30%),
-	"dark":$uni-text-color,
-    "dark-light-1":lighten($uni-text-color,10%),
-    "dark-light-2":lighten($uni-text-color,20%),
-    "dark-light-3":lighten($uni-text-color,30%),
-    "dark-dark-1":darken($uni-text-color,10%),
-    "dark-dark-2":darken($uni-text-color,20%),
-    "dark-dark-3":darken($uni-text-color,30%),
+    "mask":$uni-bg-color-mask,
     "placeholder":$uni-text-color-placeholder,
-    "disable":$uni-text-color-disable
+    "disable":$uni-text-color-disable,
+	"grey":$uni-bg-color-grey,
+	"border-color":$uni-border-color
 );
 
 .pb-safe-area {
@@ -318,33 +281,39 @@ sticky {
     }
 }
 
-.bg {
-    background-color: $uni-text-color-grey;
-}
-
 .bg-filter {
     backdrop-filter: blur(12rpx);
 }
 
-@each $key,
-$color in $color-list {
+page{
+	@each $key,
+	$color in $color-list {
+			--xl-#{$key}:#{$color};
+		.bg-#{$key},
+		.hover-bg-#{$key}:hover {
+			background-color: var(--xl-#{$key});
+		}
+		.text-#{$key}{
+			color: var(--xl-#{$key});
+		}
+		@each $i in $direction {
 
-    .bg-#{$key},
-    .hover-bg-#{$key}:hover {
-        background-color: $color;
-    }
+			.border-#{$key},
+			.border-#{$i}-#{$key} {
+				border-#{$i}-color: var(--xl-#{$key});
+			}
+
+			.border-hover-#{$key}:hover,
+			.border-hover-#{$i}-#{$key}:hover {
+				border-#{$i}-color: var(--xl-#{$key});
+			}
+		}
+	}
 }
 
 
 
 .text {
-
-    @each $key,
-    $color in $text-color-list {
-        &-#{$key} {
-            color: $color;
-        }
-    }
 
     @each $var in nowrap,
     wrap {
@@ -405,21 +374,7 @@ $color in $color-list {
     .border-#{$i} {
         border-#{$i}-width: $border-size;
         border-#{$i}-style: solid;
-        border-#{$i}-color: var(--el-border-color);
-    }
-
-    @each $key,
-    $var in $color-list {
-
-        .border-#{$key},
-        .border-#{$i}-#{$key} {
-            border-#{$i}-color: $var;
-        }
-
-        .border-hover-#{$key}:hover,
-        .border-hover-#{$i}-#{$key}:hover {
-            border-#{$i}-color: $var;
-        }
+        border-#{$i}-color: var(--xl-border-color);
     }
 }
 
@@ -594,4 +549,7 @@ img {
 ::-webkit-scrollbar-thumb:hover {
     cursor: pointer;
     background-color: #0000004d
+}
+.uni-scroll-view::-webkit-scrollbar:horizontal{
+	height: 0;
 }
