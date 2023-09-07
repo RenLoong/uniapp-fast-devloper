@@ -25,6 +25,18 @@
             }
             
         }
+        ,{
+            "path" : "pages/index/details",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "详情",
+                "enablePullDownRefresh": false,
+				"titleNView":{
+					"type":"transparent"
+				}
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

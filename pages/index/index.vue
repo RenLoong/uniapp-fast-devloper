@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<swiper class="banner-swiper bg" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000"
+		<swiper class="banner-swiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000"
 			indicator-color="rgba(255,255,255,.75)" indicator-active-color="#006EFF">
 			<swiper-item>
 				<image src="https://hk.iyunqian.cn/upload/2bn.png" mode="scaleToFill" class="banner-swiper-image">
@@ -27,6 +27,7 @@
 		</view>
 		<view class="shop-info bg-white p-4 flex flex-center bg-shop">
 			<view class="flex-1 font-weight-600 text-white">店铺名称</view>
+			<view class="text-white">流量领不停 免费送到家</view>
 		</view>
 		<scroll-view class="position-sticky bg-white" scroll-y="false" scroll-x="true" show-scrollbar="false">
 			<view class="flex px-4 font-weight-600">
@@ -35,7 +36,8 @@
 			</view>
 		</scroll-view>
 		<view class="p-4 list">
-			<view class="bg-white rounded-4 p-3 flex list-item mb-4" v-for="item in 20">
+			<view class="bg-white rounded-4 p-3 flex list-item mb-4" v-for="item in 20"
+			@tap="$page.open('/pages/index/details')">
 				<image src="https://static.91haoka.cn/1689092658oiV.jpg" mode="scaleToFill"
 					class="list-item-image rounded-4"></image>
 				<view class="flex-1 pl-4 flex flex-column">
@@ -56,6 +58,7 @@
 </template>
 
 <script lang="ts" setup>
+	import {$page} from '@/common/common'
 	import { onLoad } from '@dcloudio/uni-app'
 	onLoad(() => { })
 </script>
@@ -90,10 +93,6 @@
 		&-title {
 			line-height: 80rpx;
 		}
-	}
-
-	.bg-shop {
-		background-image: linear-gradient(160deg, var(--xl-primary-dark-2) 20%, var(--xl-primary-light-2) 60%);
 	}
 
 	.shop-info {}

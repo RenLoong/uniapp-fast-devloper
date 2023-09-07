@@ -46,6 +46,8 @@ $color-list: (
     "dark-light-1":lighten($uni-text-color,10%),
     "dark-light-2":lighten($uni-text-color,20%),
     "dark-light-3":lighten($uni-text-color,30%),
+    "dark-light-4":lighten($uni-text-color,40%),
+    "dark-light-5":lighten($uni-text-color,50%),
     "dark-dark-1":darken($uni-text-color,10%),
     "dark-dark-2":darken($uni-text-color,20%),
     "dark-dark-3":darken($uni-text-color,30%),
@@ -552,4 +554,11 @@ img {
 }
 .uni-scroll-view::-webkit-scrollbar:horizontal{
 	height: 0;
+}
+.bg-shop {
+	background-image: linear-gradient(160deg, var(--xl-primary-dark-2) 20%, var(--xl-primary-light-2) 60%);
+}
+uni-input{
+	height: auto;
+	line-height: 1;
 }

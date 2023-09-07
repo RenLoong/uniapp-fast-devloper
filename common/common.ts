@@ -137,3 +137,16 @@ export const $http = {
 		})
 	}
 }
+export const $page={
+	open:(params:UniApp.NavigateToOptions | string)=>{
+		let options:UniApp.NavigateToOptions={
+			url:''
+		};
+		if(typeof params==='string'){
+			options.url=params;
+		}else{
+			options=Object.assign(params,options);
+		}
+		uni.navigateTo(options)
+	}
+}
