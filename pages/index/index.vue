@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<swiper class="banner-swiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000"
+		<swiper class="banner-swiper" indicator-dots autoplay :interval="5000" :duration="1000"
 			indicator-color="rgba(255,255,255,.75)" indicator-active-color="#006EFF">
 			<swiper-item>
 				<image src="https://hk.iyunqian.cn/upload/2bn.png" mode="scaleToFill" class="banner-swiper-image">
@@ -19,7 +19,7 @@
 			<view class="px-4">
 				<uni-icons type="notification" color="#999999"></uni-icons>
 			</view>
-			<swiper class="notify-swiper flex-1" :autoplay="true" :interval="3000" :duration="1000" vertical>
+			<swiper class="notify-swiper flex-1" autoplay :interval="3000" :duration="1000" vertical circular>
 				<swiper-item class="" v-for="item in 10">
 					<view class="text-warning h10 font-weight-600 notify-swiper-title">公告</view>
 				</swiper-item>

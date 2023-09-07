@@ -145,8 +145,19 @@ export const $page={
 		if(typeof params==='string'){
 			options.url=params;
 		}else{
-			options=Object.assign(params,options);
+			options=Object.assign(options,params);
 		}
 		uni.navigateTo(options)
+	},
+	switch:(params:UniApp.SwitchTabOptions|string)=>{
+		let options:UniApp.SwitchTabOptions={
+			url:''
+		};
+		if(typeof params==='string'){
+			options.url=params;
+		}else{
+			options=Object.assign(options,params);
+		}
+		uni.switchTab(options);
 	}
 }
